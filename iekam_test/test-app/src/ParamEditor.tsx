@@ -70,14 +70,26 @@ export default class ParamEditor extends React.Component<IProps, IState> {
           {!this.state.toggle && (
             <div>
               <h1>Введите параметры</h1>
+              <form onSubmit={e => this.setNewParam(e)}>
+                <div>
+                  <label htmlFor='name'>Название</label>
+                  <input id='name' />
+                </div>
+                <div>
+                  <label htmlFor='type'>Тип</label>
+                  <input id='type' />
+                </div>
+                <div>
+                  <label htmlFor='value'>Значение</label>
+                  <input id='value' />
+                </div>
+                <button>Добавить</button>
+              </form>
             </div>
           )}
         </div>
       </div>
     );
-  }
-  public getModel(): IModel {
-    return this.state.IModel;
   }
 
   changeValue = (id: number, value: string) => {
@@ -88,4 +100,6 @@ export default class ParamEditor extends React.Component<IProps, IState> {
     });
     console.log(this.state.IModel.paramValues);
   };
+
+  setNewParam = (e: React.FormEvent) => {};
 }
