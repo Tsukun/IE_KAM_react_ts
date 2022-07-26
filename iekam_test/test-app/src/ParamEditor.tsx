@@ -26,6 +26,7 @@ interface IProps {
 interface IState {
   IParam: IParam[];
   IModel: IModel;
+  toggle: boolean;
 }
 
 export default class ParamEditor extends React.Component<IProps, IState> {
@@ -35,6 +36,7 @@ export default class ParamEditor extends React.Component<IProps, IState> {
     this.state = {
       IModel: props.model,
       IParam: props.params,
+      toggle: true,
     };
   }
   render() {
@@ -61,6 +63,16 @@ export default class ParamEditor extends React.Component<IProps, IState> {
             </>
           );
         })}
+        <div>
+          <button onClick={() => this.setState({ toggle: !this.state.toggle })}>
+            Добавить новый параметр
+          </button>
+          {!this.state.toggle && (
+            <div>
+              <h1>Введите параметры</h1>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
