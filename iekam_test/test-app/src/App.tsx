@@ -30,13 +30,18 @@ interface IState {
 
 const dataProps: IProps = {
   params: [
-    { id: 1, name: 'test', type: 'string' },
-    { id: 2, name: 'test', type: 'string' },
-    { id: 3, name: 'test', type: 'string' },
-    { id: 4, name: 'test', type: 'string' },
+    { id: 1, name: 'test1', type: 'string' },
+    { id: 2, name: 'test2', type: 'string' },
+    { id: 3, name: 'test3', type: 'string' },
+    { id: 4, name: 'test4', type: 'string' },
   ],
   model: {
-    paramValues: [{ paramId: 1, value: '1' }],
+    paramValues: [
+      { paramId: 1, value: '1' },
+      { paramId: 2, value: '2' },
+      { paramId: 3, value: '3' },
+      { paramId: 4, value: '4' },
+    ],
     colors: [{ color: 'white' }],
   },
 };

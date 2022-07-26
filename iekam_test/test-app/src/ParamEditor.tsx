@@ -40,20 +40,25 @@ export default class ParamEditor extends React.Component<IProps, IState> {
   render() {
     return (
       <div>
-        {this.getModel().paramValues.map(dataM => {
+        {this.state.IModel.paramValues.map(dataM => {
           return (
-            <div>
+            <>
               {this.props.params.map(dataP => {
                 if (dataM.paramId === dataP.id) {
                   return (
-                    <>
+                    <div>
                       <h2>{dataP.name}</h2>
-                      <input value={dataM.value} type='text' />
-                    </>
+                      <input
+                        id={String(dataP.id)}
+                        onChange={e => this.changeValue(Number(e.target.id), e.target.value)}
+                        defaultValue={dataM.value}
+                        type='text'
+                      />
+                    </div>
                   );
                 }
               })}
-            </div>
+            </>
           );
         })}
       </div>
@@ -62,4 +67,13 @@ export default class ParamEditor extends React.Component<IProps, IState> {
   public getModel(): IModel {
     return this.state.IModel;
   }
+
+  changeValue = (id: number, value: string) => {
+    this.state.IModel.paramValues.map((element, index) => {
+      if (element.paramId === id) {
+        this.state.IModel.paramValues[index].value = value;
+      }
+    });
+    console.log(this.state.IModel.paramValues);
+  };
 }
