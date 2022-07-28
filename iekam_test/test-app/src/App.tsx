@@ -5,6 +5,7 @@ interface IParamValue {
   value: string;
 }
 interface IColor {
+  id: number;
   color: string;
 }
 interface IModel {
@@ -42,7 +43,7 @@ const dataProps: IProps = {
       { paramId: 3, value: '3' },
       { paramId: 4, value: '4' },
     ],
-    colors: [{ color: 'white' }],
+    colors: [{ id: 1, color: 'white' }],
   },
 };
 
