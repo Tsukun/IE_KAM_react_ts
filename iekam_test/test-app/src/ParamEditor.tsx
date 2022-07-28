@@ -57,7 +57,8 @@ export default class ParamEditor extends React.Component<IProps, IState> {
         {this.state.IModel.paramValues.map(dataM => {
           return (
             <>
-              {this.props.params.map(dataP => {
+              {this.state.IParam.map(dataP => {
+                //Отрисовка input элементов из IParam и IModel
                 if (dataM.paramId === dataP.id) {
                   return (
                     <div>
@@ -70,6 +71,7 @@ export default class ParamEditor extends React.Component<IProps, IState> {
                         type='text'
                       />
                       {this.state.IModel.colors.map(colors => {
+                        //Отрисовка input элемента color из IModel
                         if (colors.id == dataM.paramId) {
                           return (
                             <>
@@ -98,31 +100,35 @@ export default class ParamEditor extends React.Component<IProps, IState> {
           <button onClick={() => this.setState({ toggle: !this.state.toggle })}>
             Добавить новый параметр
           </button>
-          {!this.state.toggle && (
-            <div>
-              <h1>Введите параметры</h1>
-              <form onSubmit={this.handleSubmit}>
-                <div>
-                  <label htmlFor='name'>Название</label>
-                  <input id='name' onChange={e => this.setState({ name: e.target.value })} />
-                </div>
-                <div>
-                  <label htmlFor='type'>Тип</label>
-                  <input id='type' onChange={e => this.setState({ type: e.target.value })} />
-                </div>
-                <div>
-                  <label htmlFor='value'>Значение</label>
-                  <input id='value' onChange={e => this.setState({ value: e.target.value })} />
-                </div>
-                <input type='submit' value='Добавить' />
-              </form>
-            </div>
-          )}
+
+          {
+            //Выпадающий список через toggle
+            !this.state.toggle && (
+              <div>
+                <h1>Введите параметры</h1>
+                <form onSubmit={this.handleSubmit}>
+                  <div>
+                    <label htmlFor='name'>Название</label>
+                    <input id='name' onChange={e => this.setState({ name: e.target.value })} />
+                  </div>
+                  <div>
+                    <label htmlFor='type'>Тип</label>
+                    <input id='type' onChange={e => this.setState({ type: e.target.value })} />
+                  </div>
+                  <div>
+                    <label htmlFor='value'>Значение</label>
+                    <input id='value' onChange={e => this.setState({ value: e.target.value })} />
+                  </div>
+                  <input type='submit' value='Добавить' />
+                </form>
+              </div>
+            )
+          }
         </div>
       </div>
     );
   }
-
+  //Изменение значений в IModel
   changeValue = (id: number, value: string) => {
     let items: IModel = this.state.IModel;
     items.paramValues.map((element, index) => {
@@ -133,7 +139,7 @@ export default class ParamEditor extends React.Component<IProps, IState> {
     });
     console.log(this.state.IModel);
   };
-
+  //Изменение цвета в IModel
   changeColor = (id: number, color: string) => {
     let items: IModel = this.state.IModel;
     items.colors.map((element, index) => {
@@ -143,6 +149,8 @@ export default class ParamEditor extends React.Component<IProps, IState> {
       }
     });
   };
+
+  //Обработка submit event из html элемента form
   handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     let max = 0;
